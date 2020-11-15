@@ -1,0 +1,3 @@
+[1114/144355.943:ERROR:directory_reader_win.cc(43)] FindFirstFile: System nie może odnaleźć określonej ścieżki. (0x3)
+[1114/150652.971:ERROR:directory_reader_win.cc(43)] FindFirstFile: System nie może odnaleźć określonej ścieżki. (0x3)
+[1114/155829.576:ERROR:directory_reader_win.cc(43)] FindFirstFile: System nie może odnaleźć określonej ścieżki. (0x3)
