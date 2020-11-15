@@ -1,19 +1,31 @@
-<h2>{{ selectedHero.name | uppercase }} Details:</h2>
 
-<app-hero-detail [hero]>"selectedHero" </app-hero-detail>
+
+<app-hero-details [hero]="selectedHero"></app-hero-details>
 
 
 <h2>My Heroes</h2>
 <ul class="heroes">
-    <li *ngFor="let hero of heroes" (click)="onSelect(hero)">
+    <li *ngFor="let hero of heroes" 
+    (click)="onSelect(hero)"
+    [class.selected]="hero === selectedHero"
+    >
+    
     <span class="badge">{{hero.id}}</span> 
     {{hero.name}}
   </li>
 </ul>
 
 <div>
-    <label>name:
+    <label>
       <input [(ngModel)]="selectedHero.name" placeholder="name"/>
     </label>
   </div>
-  <!-- <a [href] = "hero.name">Go to heroes page</a> -->
+
+  <div>
+    <h2>Add hero</h2>
+    <input placeholder="New name" [(ngModel)]="newHeroName">
+    <button (click)="onAdd()">Add {{ newHeroName }}</button>
+    <p *ngIf="expression" class="error">"Hero name must be longer than 2"</p>
+  </div>
+  
+
