@@ -23,9 +23,9 @@
 
   <div>
     <h2>Add hero</h2>
-    <input placeholder="New name" [(ngModel)]="newHeroName">
+    <input (ngModelChange)="resetError" placeholder="New name" [(ngModel)]="newHeroName">
     <button (click)="onAdd()">Add {{ newHeroName }}</button>
-    <p *ngIf="expression" class="error">"Hero name must be longer than 2"</p>
+    <p *ngIf="hasError" class="error">"Hero name must be longer than 2"</p>
   </div>
   
 

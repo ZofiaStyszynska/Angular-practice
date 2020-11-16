@@ -15,10 +15,9 @@ export class HeroesComponent implements OnInit {
   heroes = HEROES;
   newHeroName = '';
 
-  selectedHero : Hero = {
-    name: '',
-    id:0
-  };
+  selectedHero : Hero = defaultHero;
+  hasError=false;
+  deleteDialogOpen = false;
 
   onSelect(newHero: Hero): void {
     this.selectedHero = newHero;
@@ -30,11 +29,41 @@ export class HeroesComponent implements OnInit {
     };
     if (this.isNewNameValid()){
       this.heroes.push(newHero);
+      this.resetNewHeroName();
+
+      if (this.heroes.length ===1) {
+        this.selectedHero = newHero;
+      }
 
     }else{
-      window.alert("Hero name must be longer than 2")
+      this.hasError = true;
     }
   
+  }
+  onDeleteAll(): void {
+    this.heroes = [];
+    this.selectedHero = defaultHero;
+    this.toggleDeleteDialog(false);
+  }
+
+  onDeleteSelectedHero(): void {
+    const newHeroes = this.heroes.filter(hero => {
+      return this.selectedHero.id !== hero.id;
+    });
+
+    this.heroes = newHeroes;
+
+    if (!newHeroes.length) {
+      this.selectedHero = defaultHero;
+    }
+  }
+
+  toggleDeleteDialog(show: boolean): void {
+    this.deleteDialogOpen = show;
+  }
+
+  resetError(): void {
+    this.hasError=false;
   }
   isNewNameValid():boolean{
     const nameLength = this.newHeroName.length;
