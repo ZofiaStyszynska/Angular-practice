@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import {HEROES} from '../mocks/mock-heroes';
 
+const defaultHero = {name: '', id: 0};
+
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
@@ -15,8 +17,8 @@ export class HeroesComponent implements OnInit {
   heroes = HEROES;
   newHeroName = '';
 
-  selectedHero : Hero = defaultHero;
-  hasError=false;
+  selectedHero: Hero = defaultHero;
+  hasError = false;
   deleteDialogOpen = false;
 
   onSelect(newHero: Hero): void {
@@ -31,14 +33,14 @@ export class HeroesComponent implements OnInit {
       this.heroes.push(newHero);
       this.resetNewHeroName();
 
-      if (this.heroes.length ===1) {
+      if (this.heroes.length === 1) {
         this.selectedHero = newHero;
       }
 
     }else{
       this.hasError = true;
     }
-  
+
   }
   onDeleteAll(): void {
     this.heroes = [];
@@ -63,23 +65,32 @@ export class HeroesComponent implements OnInit {
   }
 
   resetError(): void {
-    this.hasError=false;
+    this.hasError = false;
   }
-  isNewNameValid():boolean{
+  resetNewHeroName(): void {
+    this.newHeroName = '';
+  }
+  isNewNameValid(): boolean{
     const nameLength = this.newHeroName.length;
-    return (nameLength>2 &&nameLength<13) ? true:false;
-      
-    
+    return (nameLength > 2 && nameLength < 13) ? true : false;
+
+    }
+
+  showDetails(): boolean {
+    return this.selectedHero !== defaultHero;
   }
 
   getNewID(): number {
+    if (!this.heroes.length) {
+      return 0;
+    }
     const ids = this.heroes.map(hero => {
       return hero.id;
     });
 
     return Math.max(...ids) + 1;
   }
-  selectDefaultHero():void{
+  selectDefaultHero(): void{
     this.selectedHero = this.heroes[0];
   }
 
